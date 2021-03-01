@@ -5,19 +5,19 @@ using System.Linq;
 
 namespace urfu_combinatorial_algorithms
 {
-    public class Task1 : ITask<List<List<int>> , int[,]>
+    public class Task1 : ITask<List<List<int>> , bool[,]>
     {
-        public int[,] LoadFromFile(string filePath)
+        public bool[,] LoadFromFile(string filePath)
         {
             var data = File.ReadLines(filePath).ToArray();
             var nodeCount = int.Parse(data[0]);
-            var result = new int[nodeCount, nodeCount];
+            var result = new bool[nodeCount, nodeCount];
 
             for (var i = 0; i < nodeCount; i++)
             {
                 var line = data[i + 1];
                 for (var j = 0; j < nodeCount; j++)
-                    result[i, j] = int.Parse(line[j].ToString());
+                    result[i, j] = line[j] == '1';
             }
 
             return result;
@@ -29,14 +29,14 @@ namespace urfu_combinatorial_algorithms
 
             for (var i = 0; i < data.Count; i++)
             {
-                text.Add(string.Join("", data[i]));
+                text.Add(string.Join("", data[i].Select(x => x + 1)));
                 if (i != data.Count - 1) text.Add("0");
             }
             
             File.WriteAllText(path, string.Join("\n", text));
         }
         
-        public List<List<int>> Solve(int[,] inputData)
+        public List<List<int>> Solve(bool[,] inputData)
         {
             var checkedNodes = new HashSet<int>();
             var connectivityComponents = new List<List<int>>();
@@ -52,18 +52,18 @@ namespace urfu_combinatorial_algorithms
                         currentFather = i;
                         break;
                     }
-                if (currentFather == -1) throw new Exception();
+                if (currentFather == -1) throw new Exception("currentFather == -1");
                 
                 stack.Push(currentFather);
                 while (stack.Any())
                 {
                     var currentNode = stack.Pop();
-                    currentConnectivityComponent.Add(currentNode);
                     if (checkedNodes.Contains(currentNode))
                         continue;
+                    currentConnectivityComponent.Add(currentNode);
                     checkedNodes.Add(currentNode);
                     for (var i = 0; i < inputData.GetLength(0); i++)
-                        if (!checkedNodes.Contains(i))
+                        if (inputData[currentNode, i] &&  !checkedNodes.Contains(i))
                             stack.Push(i);
                 }
                 
