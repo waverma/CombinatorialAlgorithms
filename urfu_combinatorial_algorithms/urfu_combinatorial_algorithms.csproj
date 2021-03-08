@@ -49,6 +49,7 @@
       <Content Include="input2.txt" />
       <Content Include="output.txt" />
       <Content Include="output2.txt" />
+      <Content Include="README.md" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

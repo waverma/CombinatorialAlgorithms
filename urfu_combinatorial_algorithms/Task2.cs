@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace urfu_combinatorial_algorithms
+namespace CombinatorialAlgorithms
 {
     public struct Point
     {
@@ -41,8 +40,11 @@ namespace urfu_combinatorial_algorithms
         }
     }
     
-    public class Task2 : ITask<List<string>, MazeWithTarget>
+    public class Task2 : ITask<List<string>, MazeWithTarget>, ITask
     {
+        public void Solve(string inputFilePath, string outputFilePath) 
+            => SaveToFile(Solve(LoadFromFile(inputFilePath)), outputFilePath);
+        
         public MazeWithTarget LoadFromFile(string filePath)
         {
             var data = File.ReadAllLines(filePath);

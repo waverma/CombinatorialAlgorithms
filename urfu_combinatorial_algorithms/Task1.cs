@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace urfu_combinatorial_algorithms
+namespace CombinatorialAlgorithms
 {
-    public class Task1 : ITask<List<List<int>> , bool[,]>
+    public class Task1 : ITask<List<List<int>> , bool[,]>, ITask
     {
         public bool[,] LoadFromFile(string filePath)
         {
@@ -71,6 +71,11 @@ namespace urfu_combinatorial_algorithms
             }
             
             return connectivityComponents;
+        }
+
+        public void Solve(string inputFilePath, string outputFilePath)
+        {
+            SaveToFile(Solve(LoadFromFile(inputFilePath)), outputFilePath);
         }
     }
 }
