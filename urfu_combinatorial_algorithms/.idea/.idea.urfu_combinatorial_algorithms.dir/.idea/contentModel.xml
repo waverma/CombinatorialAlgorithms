@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Maxim\.Rider2019.3\config\extensions" t="IncludeRecursive" />
-    <e p="C:\Users\Maxim\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Maxim\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
-    <e p="F:\MyProgProject\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms" t="IncludeRecursive">
+    <e p="C:\Users\dns\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\dns\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_.19.00" t="ExcludeRecursive" />
+    <e p="D:\Programming\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms" t="IncludeRecursive">
       <e p="bin" t="ExcludeRecursive" />
-      <e p="input.txt" t="Include" />
+      <e p="in.txt" t="Include" />
       <e p="input2.txt" t="Include" />
       <e p="ITask.cs" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
-      <e p="output.txt" t="Include" />
+      <e p="out.txt" t="Include" />
       <e p="output2.txt" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="Program.cs" t="Include" />

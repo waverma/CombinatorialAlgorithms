@@ -6,11 +6,13 @@ namespace CombinatorialAlgorithms
 {
     internal class Program
     {
+        private static int TASK_NUMBER = 0;
+        private const string IN_FILE_NAME = @"..\..\in.txt";
+        private const string OUT_FILE_NAME = @"..\..\out.txt";
+        
         public static void Main(string[] args)
         {
-            var inputFileName = @"..\..\input2.txt";
-            var outputFileName = @"..\..\output2.txt";
-            var taskNumber = 1;
+            if (args.Length == 1 && int.TryParse(args[0], out var result)) TASK_NUMBER = result;
             
             var tasksContainer = new List<Lazy<ITask>>
             {
@@ -18,22 +20,22 @@ namespace CombinatorialAlgorithms
                 new Lazy<ITask>(() => new Task2()),
             };
 
-            if (!(args is null) && args.Length > 0)
-            {
-                var parsedArg = string.Join(" ", args)
-                    .Split('\'')
-                    .Where(x => x != " ")
-                    .Where(x => x != "")
-                    .ToArray();
-                
-                if (parsedArg.Length != 3) throw new ArgumentException(string.Join(" ", args));
+            // if (!(args is null) && args.Length > 0)
+            // {
+            //     var parsedArg = string.Join(" ", args)
+            //         .Split('\'')
+            //         .Where(x => x != " ")
+            //         .Where(x => x != "")
+            //         .ToArray();
+            //     
+            //     if (parsedArg.Length != 3) throw new ArgumentException(string.Join(" ", args));
+            //
+            //     inputFileName = parsedArg[0];
+            //     outputFileName = parsedArg[1];
+            //     taskNumber = int.Parse(parsedArg[2]);
+            // }
 
-                inputFileName = parsedArg[0];
-                outputFileName = parsedArg[1];
-                taskNumber = int.Parse(parsedArg[2]);
-            }
-
-            tasksContainer[taskNumber].Value.Solve(inputFileName, outputFileName);
+            tasksContainer[TASK_NUMBER].Value.Solve(IN_FILE_NAME, OUT_FILE_NAME);
         }
     }
 }

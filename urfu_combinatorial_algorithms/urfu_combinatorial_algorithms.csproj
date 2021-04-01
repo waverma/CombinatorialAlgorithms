@@ -45,9 +45,9 @@
         <Compile Include="Task2.cs" />
     </ItemGroup>
     <ItemGroup>
-      <Content Include="input.txt" />
+      <Content Include="in.txt" />
       <Content Include="input2.txt" />
-      <Content Include="output.txt" />
+      <Content Include="out.txt" />
       <Content Include="output2.txt" />
       <Content Include="README.md" />
     </ItemGroup>

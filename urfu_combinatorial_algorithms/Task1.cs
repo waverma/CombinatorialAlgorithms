@@ -17,7 +17,7 @@ namespace CombinatorialAlgorithms
             {
                 var line = data[i + 1];
                 for (var j = 0; j < nodeCount; j++)
-                    result[i, j] = line[j] == '1';
+                    result[i, j] = line[j * 2] == '1';
             }
 
             return result;
