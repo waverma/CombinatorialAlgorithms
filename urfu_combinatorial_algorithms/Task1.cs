@@ -29,7 +29,7 @@ namespace CombinatorialAlgorithms
 
             for (var i = 0; i < data.Count; i++)
             {
-                text.Add(string.Join("", data[i].Select(x => x + 1)));
+                text.Add(string.Join(" ", data[i].Select(x => x + 1)));
                 if (i != data.Count - 1) text.Add("0");
             }
             
