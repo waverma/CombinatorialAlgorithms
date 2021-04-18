@@ -6,9 +6,9 @@ namespace CombinatorialAlgorithms
 {
     internal class Program
     {
-        private static int TASK_NUMBER = 0;
-        private const string IN_FILE_NAME = @"..\..\in.txt";
-        private const string OUT_FILE_NAME = @"..\..\out.txt";
+        private static int TASK_NUMBER = 1;
+        private const string IN_FILE_NAME = @"..\..\input2.txt";
+        private const string OUT_FILE_NAME = @"..\..\output2.txt";
         
         public static void Main(string[] args)
         {

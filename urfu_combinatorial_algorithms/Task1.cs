@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -38,39 +37,55 @@ namespace CombinatorialAlgorithms
         
         public List<List<int>> Solve(bool[,] inputData)
         {
-            var checkedNodes = new HashSet<int>();
+            var visited = new HashSet<int>();
             var connectivityComponents = new List<List<int>>();
+            var nodeCount = inputData.GetLength(0);
 
-            while (checkedNodes.Count != inputData.GetLength(0))
+            while (visited.Count < nodeCount)
             {
-                var stack = new Stack<int>();
                 var currentConnectivityComponent = new List<int>();
-                var currentFather = -1;
-                for (var i = 0; i < inputData.GetLength(0); i++)
-                    if (!checkedNodes.Contains(i))
-                    {
-                        currentFather = i;
-                        break;
-                    }
-                if (currentFather == -1) throw new Exception("currentFather == -1");
                 
-                stack.Push(currentFather);
-                while (stack.Any())
+                foreach (var node in GetAllNodesByDfs(inputData, nodeCount, GetStartNode(visited, nodeCount)))
                 {
-                    var currentNode = stack.Pop();
-                    if (checkedNodes.Contains(currentNode))
-                        continue;
-                    currentConnectivityComponent.Add(currentNode);
-                    checkedNodes.Add(currentNode);
-                    for (var i = 0; i < inputData.GetLength(0); i++)
-                        if (inputData[currentNode, i] &&  !checkedNodes.Contains(i))
-                            stack.Push(i);
+                    currentConnectivityComponent.Add(node);
+                    visited.Add(node);
                 }
                 
-                connectivityComponents.Add(currentConnectivityComponent);
+                connectivityComponents.Add(currentConnectivityComponent.OrderBy(x => x).ToList());
             }
             
             return connectivityComponents;
+        }
+
+        private IEnumerable<int> GetAllNodesByDfs(bool[,] inputData, int totalNodeCount, int startNode)
+        {
+            var stack = new Stack<int>();
+            var visited = new HashSet<int>();
+            
+            stack.Push(startNode);
+            while (stack.Any())
+            {
+                var currentNode = stack.Pop();
+                if (visited.Contains(currentNode)) continue;
+                yield return currentNode;
+                visited.Add(currentNode);
+                for (var i = 0; i < totalNodeCount; i++)
+                    if (inputData[currentNode, i])
+                        stack.Push(i);
+            }
+        }
+
+        private int GetStartNode(HashSet<int> visited, int totalNodeCount)
+        {
+            var currentFather = -1;
+            for (var i = 0; i < totalNodeCount; i++)
+                if (!visited.Contains(i))
+                {
+                    currentFather = i;
+                    break;
+                }
+
+            return currentFather;
         }
 
         public void Solve(string inputFilePath, string outputFilePath)

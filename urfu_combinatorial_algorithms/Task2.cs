@@ -11,7 +11,7 @@ namespace CombinatorialAlgorithms
         
         public Point(int x, int y)
         {
-            X = x;
+            X = x;    
             Y = y;
         }
 
@@ -23,7 +23,7 @@ namespace CombinatorialAlgorithms
             }
         }
 
-        public override string ToString() => (X + 1).ToString() + (Y + 1).ToString();
+        public override string ToString() => (X + 1) + " " + (Y + 1);
     }
     
     public class MazeWithTarget
@@ -47,7 +47,8 @@ namespace CombinatorialAlgorithms
         
         public MazeWithTarget LoadFromFile(string filePath)
         {
-            var data = File.ReadAllLines(filePath);
+            var data = File.ReadAllLines(filePath).Where(x => x != "").ToArray();
+
             var maze = new bool[int.Parse(data[0]), int.Parse(data[1])];
             var start = new Point(
                 int.Parse(data[int.Parse(data[0]) + 2].Split(' ')[0]) - 1,
@@ -75,42 +76,52 @@ namespace CombinatorialAlgorithms
 
         public List<string> Solve(MazeWithTarget inputData)
         {
-            var checkedNodes = new HashSet<Point>();
-            var queue = new Queue<Point>();
+            var visited = new HashSet<Point>();
             var previousPoint = new Point(-1, -1);
             var transitions = new Dictionary<Point, Point>();
+            var queue = new Queue<Point>();
 
             queue.Enqueue(inputData.Target);
             while (queue.Any())
             {
                 var currentPoint = queue.Dequeue();
-                transitions[currentPoint] = previousPoint;
-                if (checkedNodes.Contains(currentPoint))
+                
+                if (visited.Contains(currentPoint))
                     continue;
-                checkedNodes.Add(currentPoint);
+                visited.Add(currentPoint);
                 
                 
-                if (inputData.Start.Equals(currentPoint))
+                if (inputData.Start.Equals(previousPoint))
                 {
-                    var result = new List<string> {"Y"};
-                    var currentPointToFindPath = inputData.Start;
-                    while (!currentPointToFindPath.Equals(inputData.Target))
-                    {
-                        result.Add(currentPointToFindPath.ToString());
-                        currentPointToFindPath = transitions[currentPointToFindPath];
-                    }
-                    result.Add(inputData.Target.ToString());
-                    return result;
+                    return GetResult(transitions, inputData.Start, inputData.Target);
                 }
 
-                
-                foreach (var nextPoint in GetIncidentPoints(inputData.Maze, currentPoint))
-                    if (!inputData.Maze[nextPoint.X, nextPoint.Y] && !checkedNodes.Contains(nextPoint))
+
+                var incident = GetIncidentPoints(inputData.Maze, currentPoint);
+                foreach (var nextPoint in incident)
+                    if (!inputData.Maze[nextPoint.X, nextPoint.Y] && !visited.Contains(nextPoint))
+                    {
+                        transitions[nextPoint] = currentPoint;
                         queue.Enqueue(nextPoint);
+                    }
                 previousPoint = currentPoint;
             }
 
             return new List<string> {"N"};
+        }
+
+        private static List<string> GetResult(IReadOnlyDictionary<Point, Point> transitions, Point start, Point target)
+        {
+            var result = new List<string> {"Y"};
+            var currentPointToFindPath = start;
+            while (!currentPointToFindPath.Equals(target))
+            {
+                result.Add(currentPointToFindPath.ToString());
+                if (!transitions.ContainsKey(currentPointToFindPath)) break;
+                currentPointToFindPath = transitions[currentPointToFindPath];
+            }
+            result.Add(target.ToString());
+            return result;
         }
 
         private static IEnumerable<Point> GetIncidentPoints(bool[,] maze, Point point)
