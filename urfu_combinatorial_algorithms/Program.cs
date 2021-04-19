@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using urfu_combinatorial_algorithms;
 
 namespace CombinatorialAlgorithms
 {
     internal class Program
     {
-        private static int TASK_NUMBER = 1;
-        private const string IN_FILE_NAME = @"..\..\input2.txt";
-        private const string OUT_FILE_NAME = @"..\..\output2.txt";
+        private static int TASK_NUMBER = 2;
+        private const string IN_FILE_NAME = @"..\..\in.txt";
+        private const string OUT_FILE_NAME = @"..\..\out.txt";
         
         public static void Main(string[] args)
         {
-            if (args.Length == 1 && int.TryParse(args[0], out var result)) TASK_NUMBER = result;
+            //if (args.Length == 1 && int.TryParse(args[0], out var result)) TASK_NUMBER = result;
             
             var tasksContainer = new List<Lazy<ITask>>
             {
                 new Lazy<ITask>(() => new Task1()),
                 new Lazy<ITask>(() => new Task2()),
+                new Lazy<ITask>(() => new Task3()),
             };
 
             // if (!(args is null) && args.Length > 0)
