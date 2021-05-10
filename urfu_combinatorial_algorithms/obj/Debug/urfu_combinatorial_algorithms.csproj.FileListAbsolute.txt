@@ -10,3 +10,7 @@ D:\Programming\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\obj\D
 D:\Programming\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\obj\Debug\urfu_combinatorial_algorithms.csproj.CoreCompileInputs.cache
 D:\Programming\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\obj\Debug\urfu_combinatorial_algorithms.exe
 D:\Programming\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\obj\Debug\urfu_combinatorial_algorithms.pdb
+F:\MyProgProject\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\bin\Debug\FluentApi.Graph.exe
+F:\MyProgProject\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\bin\Debug\FluentApi.Graph.pdb
+F:\MyProgProject\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\bin\Debug\FluentApi.Graph.exe.config
+F:\MyProgProject\urfu_combinatorial_algorithms\urfu_combinatorial_algorithms\obj\Debug\urfu_combinatorial_algorithms.csproj.CopyComplete

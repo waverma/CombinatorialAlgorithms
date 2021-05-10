@@ -44,6 +44,7 @@
     <Compile Include="Task1.cs" />
     <Compile Include="Task2.cs" />
     <Compile Include="Task3.cs" />
+    <Compile Include="Task31.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="in.txt" />
@@ -51,6 +52,12 @@
     <Content Include="out.txt" />
     <Content Include="output2.txt" />
     <Content Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OOP2_Ulearn\9_1\FluentApi.Graph.csproj">
+      <Project>{b4086346-f1c5-4d4b-9111-5fef66ddbee0}</Project>
+      <Name>FluentApi.Graph</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

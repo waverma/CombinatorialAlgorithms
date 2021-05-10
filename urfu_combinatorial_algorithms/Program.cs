@@ -5,13 +5,13 @@ using urfu_combinatorial_algorithms;
 
 namespace CombinatorialAlgorithms
 {
-    internal class Program
+    public class Program
     {
         private static int TASK_NUMBER = 2;
         private const string IN_FILE_NAME = @"..\..\in.txt";
         private const string OUT_FILE_NAME = @"..\..\out.txt";
         
-        public static void Main(string[] args)
+        public static void Main()
         {
             //if (args.Length == 1 && int.TryParse(args[0], out var result)) TASK_NUMBER = result;
             
