@@ -7,6 +7,9 @@ namespace CombinatorialAlgorithms
 {
     public struct Point
     {
+        private static int idCounter;
+        
+        public int Id { get; set; }
         public int X { get; }
         public int Y { get; }
         
@@ -14,11 +17,22 @@ namespace CombinatorialAlgorithms
         {
             X = x;    
             Y = y;
+            Id = ++idCounter;
         }
         
         public int GetMetricTo(Point point)
         {
             return Math.Abs(X - point.X) + Math.Abs(Y - point.Y);
+        }
+
+        public static bool operator ==(Point left, Point right)
+        {
+            return left.GetHashCode() == right.GetHashCode();
+        }
+        
+        public static bool operator !=(Point left, Point right)
+        {
+            return left.GetHashCode() != right.GetHashCode();
         }
 
         public override int GetHashCode()
