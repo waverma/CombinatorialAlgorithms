@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -14,6 +15,11 @@ namespace CombinatorialAlgorithms
             X = x;    
             Y = y;
         }
+        
+        public int GetMetricTo(Point point)
+        {
+            return Math.Abs(X - point.X) + Math.Abs(Y - point.Y);
+        }
 
         public override int GetHashCode()
         {
@@ -23,7 +29,7 @@ namespace CombinatorialAlgorithms
             }
         }
 
-        public override string ToString() => (X + 1) + " " + (Y + 1);
+        public override string ToString() => (X) + ", " + (Y);
     }
     
     public class MazeWithTarget
