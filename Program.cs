@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using urfu_combinatorial_algorithms;
 
 namespace CombinatorialAlgorithms
 {
-    internal class Program
+    internal static class Program
     {
-        private static int TASK_NUMBER = 3;
-        private const string IN_FILE_NAME = @"..\..\in.txt";
-        private const string OUT_FILE_NAME = @"..\..\out.txt";
+        private const int TaskNumber = 4;
+        // private const string InFileName = @"..\..\in.txt";
+        // private const string OutFileName = @"..\..\out.txt";
+        private const string InFileName = @"in.txt";
+        private const string OutFileName = @"out.txt";
         
-        public static void Main(string[] args)
+        public static void Main()
         {
-            
             var tasksContainer = new List<Lazy<ITask>>
             {
                 new Lazy<ITask>(() => new Task1()),
@@ -22,7 +21,7 @@ namespace CombinatorialAlgorithms
                 new Lazy<ITask>(() => new Task4()),
             };
 
-            tasksContainer[TASK_NUMBER].Value.Solve(IN_FILE_NAME, OUT_FILE_NAME);
+            tasksContainer[TaskNumber - 1].Value.Solve(InFileName, OutFileName);
         }
     }
 }

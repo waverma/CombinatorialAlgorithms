@@ -7,7 +7,7 @@
     <ProjectGuid>{B1507FD3-105A-4F74-AA6D-52D49963F101}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>urfu_combinatorial_algorithms</RootNamespace>
+    <RootNamespace>CombinatorialAlgorithms</RootNamespace>
     <AssemblyName>CombinatorialAlgorithms</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

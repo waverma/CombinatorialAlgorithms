@@ -20,6 +20,47 @@ namespace CombinatorialAlgorithms
             Id = ++idCounter;
         }
         
+        public Point(string point)
+        {
+            try
+            {
+                var firstDigitFlag = false;
+                var sepFlag = false;
+                var secondDigitFlag = false;
+                var current = "";
+                var x = point[0] == '-' ? -1 : 1;
+                Y = 1;
+            
+                foreach (var s in point.Skip(point[0] == '-' ? 1 : 0))
+                {
+                    if (char.IsDigit(s))
+                    {
+                        if (firstDigitFlag && sepFlag) secondDigitFlag = true;
+                        firstDigitFlag = true;
+                        current += s;
+                    }
+                    else if (s == '-')
+                        Y = -1;
+                    else
+                    {
+                        sepFlag = true;
+                        if (!firstDigitFlag) throw new Exception("No digit before separator");
+                        if (current != "") x *= int.Parse(current);
+                        current = "";
+                    }
+                }
+                
+                if (!secondDigitFlag) throw new Exception("No second number");
+                X = x;
+                Y *= int.Parse(current);
+                Id = ++idCounter;
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error while creating point: '{point}'. {e.Message}", e);
+            }
+        }
+        
         public int GetMetricTo(Point point)
         {
             return Math.Abs(X - point.X) + Math.Abs(Y - point.Y);

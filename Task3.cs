@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace urfu_combinatorial_algorithms
+namespace CombinatorialAlgorithms
 {
     public class Info
     {

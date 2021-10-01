@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using CombinatorialAlgorithms;
 
-namespace urfu_combinatorial_algorithms
+namespace CombinatorialAlgorithms
 {
     public class Edge
     {
@@ -65,13 +65,13 @@ namespace urfu_combinatorial_algorithms
 
     public class Alg
     {
-        private GrowingUp growingUp;
+        private readonly GrowingUp growingUp;
 
         private Point[] Source => growingUp.Source;
         private Dictionary<Point, Point> Name => growingUp.Name;
         private Dictionary<Point, Point> Next => growingUp.Next;
         private Dictionary<Point, int> Size => growingUp.Size;
-        private List<Edge> Edges => growingUp.Edges;
+        private IEnumerable<Edge> Edges => growingUp.Edges;
         
         public Alg(GrowingUp growingUp)
         {
@@ -118,7 +118,8 @@ namespace urfu_combinatorial_algorithms
             return File.ReadAllLines(filePath)
                 .Where(x => x != "")
                 .Skip(1)
-                .Select(x => new Point(int.Parse(x.Split(' ')[0]), int.Parse(x.Split(' ')[1])))
+                // .Select(x => new Point(int.Parse(x.Split(' ')[0]), int.Parse(x.Split(' ')[1])))
+                .Select(x => new Point(x))
                 .ToList();
         }
 
