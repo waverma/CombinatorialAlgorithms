@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using CombinatorialAlgorithms;
 
 namespace CombinatorialAlgorithms
 {
@@ -13,6 +13,7 @@ namespace CombinatorialAlgorithms
 
         public Edge(Point from, Point to)
         {
+            if (from == to) throw new Exception($"Edge connect similar points: {from.ToString()}");
             From = from;
             To = to;
         }
@@ -56,6 +57,7 @@ namespace CombinatorialAlgorithms
                 u = Next[u];
             }
 
+            Size[p] += Size[q];
             var x = Next[v];
             var y = Next[w];
             Next[v] = y;
@@ -85,9 +87,12 @@ namespace CombinatorialAlgorithms
             foreach (var edge in Edges.OrderBy(x => x.Size))
                 queue.Enqueue(edge);
 
+            // Console.WriteLine(string.Join(", ", queue.Select(x => $"({x.From} - - {x.To} - - {x.Size})")));
+            
             while (result.Count != Source.Length - 1)
             {
                 var vw = queue.Dequeue();
+                // _ = queue.Dequeue();
                 var p = Name[vw.From];
                 var q = Name[vw.To];
 
@@ -106,7 +111,7 @@ namespace CombinatorialAlgorithms
         }
     }
     
-    public class Task4 : ITask, ITask<(List<List<int>>, int), List<Point>>
+    public class Task4 : ITask, ITask<(List<List<string>>, int), List<Point>>
     {
         public void Solve(string inputFilePath, string outputFilePath)
         {
@@ -118,27 +123,32 @@ namespace CombinatorialAlgorithms
             return File.ReadAllLines(filePath)
                 .Where(x => x != "")
                 .Skip(1)
-                // .Select(x => new Point(int.Parse(x.Split(' ')[0]), int.Parse(x.Split(' ')[1])))
                 .Select(x => new Point(x))
                 .ToList();
         }
 
-        public void SaveToFile((List<List<int>>, int) data, string path)
+        public void SaveToFile((List<List<string>>, int) data, string path)
         {
-            var result = data.Item1.Select(x => string.Join(" ", x.OrderBy(y => y)) + " 0").ToList();
+            var input = LoadFromFile("in.txt");
+            var result = data.Item1.Select((x, i) => string.Join(" ", x.OrderBy(y => y)) + " 0").ToList();
+            // var result = data.Item1.Select((x, i) => $"({input[i].ToString()}):\t\t{string.Join("\t\t", x.OrderBy(y => y).Select(y => $"({input[int.Parse(y) - 1]})"))} 0").ToList();
             result.Add(data.Item2.ToString());
             File.WriteAllLines(path, result);
+            Console.WriteLine(File.ReadAllText(path));
         }
 
-        public (List<List<int>>, int) Solve(List<Point> inputData)
+        public (List<List<string>>, int) Solve(List<Point> inputData)
         {
             var resultOfAlg = new Alg(new GrowingUp(inputData)).Solve();
-            var a = resultOfAlg.Select(x => (x.From, x.To)).Concat(resultOfAlg.Select(x => (x.To, x.From))).GroupBy(x => x.Item1.Id).Select(x => x.Select(y => y.Item2.Id).ToList()).ToList();
-            
-            
-            //var b = new Alg(new GrowingUp(inputData)).Solve().Select(x => (x.From, x.To)).Concat(resultOfAlg.Select(x => (x.To, x.From))).GroupBy(x => x.Item1.Id).Select(x => x.Select(y => y.Item2.Id).ToList()).ToList().Select(x => string.Join(" ", x.OrderBy(y => y)) + " 0").ToList();
-            
-            
+            var a = resultOfAlg.Concat(resultOfAlg.Select(x => new Edge(x.To, x.From)))
+                .GroupBy(x => x.From.Id)
+                .OrderBy(x => x.Key)
+                // .Select((x, i) => x.Select(y => $"({i} - - {x.Key} - - {y.To.Id})").ToList())
+                .Select(x => x.Select(y => y.To.Id.ToString()).ToList())
+                .ToList();
+            // var b = a.GroupBy(x => x.Item1.Id)
+            //     .Select(x => x.Select(y => y.Item2.Id).ToList())
+            //     .ToList();
             
             return (a, resultOfAlg.Sum(x => x.Size));
         }
