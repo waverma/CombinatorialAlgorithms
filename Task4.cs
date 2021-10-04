@@ -87,8 +87,6 @@ namespace CombinatorialAlgorithms
             foreach (var edge in Edges.OrderBy(x => x.Size))
                 queue.Enqueue(edge);
 
-            // Console.WriteLine(string.Join(", ", queue.Select(x => $"({x.From} - - {x.To} - - {x.Size})")));
-            
             while (result.Count != Source.Length - 1)
             {
                 var vw = queue.Dequeue();
@@ -134,7 +132,6 @@ namespace CombinatorialAlgorithms
             // var result = data.Item1.Select((x, i) => $"({input[i].ToString()}):\t\t{string.Join("\t\t", x.OrderBy(y => y).Select(y => $"({input[int.Parse(y) - 1]})"))} 0").ToList();
             result.Add(data.Item2.ToString());
             File.WriteAllLines(path, result);
-            Console.WriteLine(File.ReadAllText(path));
         }
 
         public (List<List<string>>, int) Solve(List<Point> inputData)
