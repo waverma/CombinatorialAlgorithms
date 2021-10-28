@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "urfu_combinatorial_algorithms", "urfu_combinatorial_algorithms.csproj", "{B1507FD3-105A-4F74-AA6D-52D49963F101}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CombinatorialAlgorithms", "CombinatorialAlgorithms.csproj", "{B1507FD3-105A-4F74-AA6D-52D49963F101}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
