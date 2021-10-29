@@ -5,11 +5,11 @@ namespace CombinatorialAlgorithms
 {
     internal static class Program
     {
-        private const int TaskNumber = 4;
-        // private const string InFileName = @"..\..\in.txt";
-        // private const string OutFileName = @"..\..\out.txt";
-        private const string InFileName = @"in.txt";
-        private const string OutFileName = @"out.txt";
+        private const int TaskNumber = 5;
+        private const string InFileName = @"..\..\in.txt";
+        private const string OutFileName = @"..\..\out.txt";
+        // private const string InFileName = @"in.txt";
+        // private const string OutFileName = @"out.txt";
         
         public static void Main()
         {
@@ -19,6 +19,7 @@ namespace CombinatorialAlgorithms
                 new Lazy<ITask>(() => new Task2()),
                 new Lazy<ITask>(() => new Task3()),
                 new Lazy<ITask>(() => new Task4()),
+                new Lazy<ITask>(() => new Task5()),
             };
 
             tasksContainer[TaskNumber - 1].Value.Solve(InFileName, OutFileName);
