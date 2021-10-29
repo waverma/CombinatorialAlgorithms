@@ -6,13 +6,14 @@ namespace CombinatorialAlgorithms
     internal static class Program
     {
         private const int TaskNumber = 5;
-        private const string InFileName = @"..\..\in.txt";
-        private const string OutFileName = @"..\..\out.txt";
-        // private const string InFileName = @"in.txt";
-        // private const string OutFileName = @"out.txt";
+        private static readonly (string, string) DebugFilePaths = (@"..\..\in.txt", @"..\..\out.txt");
+        private static readonly (string, string) ReleaseFilePaths = (@"in.txt", @"out.txt");
+        private static bool debugMode;
         
         public static void Main()
         {
+            debugMode = false;
+            
             var tasksContainer = new List<Lazy<ITask>>
             {
                 new Lazy<ITask>(() => new Task1()),
@@ -22,7 +23,9 @@ namespace CombinatorialAlgorithms
                 new Lazy<ITask>(() => new Task5()),
             };
 
-            tasksContainer[TaskNumber - 1].Value.Solve(InFileName, OutFileName);
+            var inFileName = debugMode ? DebugFilePaths.Item1 : ReleaseFilePaths.Item1;
+            var outFileName = debugMode ? DebugFilePaths.Item2 : ReleaseFilePaths.Item2;
+            tasksContainer[TaskNumber - 1].Value.Solve(inFileName, outFileName);
         }
     }
 }

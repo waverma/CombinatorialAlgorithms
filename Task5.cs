@@ -7,10 +7,10 @@ namespace CombinatorialAlgorithms
 {
     public class BipartiteGraph
     {
-        public bool[][] Matrix { get; }
+        private bool[][] Matrix { get; }
         public Func<int, int[]> EMaker { get; }
         public int XCount { get; } 
-        public int YCount {get;}
+        public int YCount { get; }
 
         public BipartiteGraph(int xCount, int yCount, int[][] adjacencyLists)
         {
@@ -47,15 +47,18 @@ namespace CombinatorialAlgorithms
         public BipartiteGraph LoadFromFile(string filePath)
         {
             var data = File.ReadLines(filePath).ToArray();
-            var xAndYCount = data.First().Split(' ').Select(int.Parse).ToArray();
+            var xAndYCount = data.First()
+                                 .Split(' ')
+                                 .Select(int.Parse)
+                                 .ToArray();
 
             var matrix = data
                 .Skip(1)
                 .Select(x => x.Split(' ')
-                                   .Select(int.Parse)
-                                   .Select(y => y - 1)
-                                   .Where(y => y >= 0)
-                                   .ToArray()
+                              .Select(int.Parse)
+                              .Select(y => y - 1)
+                              .Where(y => y >= 0)
+                              .ToArray()
                 ).ToArray();
 
             return new BipartiteGraph(xAndYCount[0], xAndYCount[1], matrix);
@@ -84,7 +87,7 @@ namespace CombinatorialAlgorithms
             return currentBipartiteX.ToList();
         }
 
-        private bool DFS(int startXVertex, Func<int, int[]> eMaker, HashSet<int> visitedVertex)
+        private bool DFS(int startXVertex, Func<int, int[]> eMaker, ISet<int> visitedVertex)
         {
             if (visitedVertex.Contains(startXVertex)) return false;
             visitedVertex.Add(startXVertex);
