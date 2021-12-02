@@ -5,14 +5,14 @@ namespace CombinatorialAlgorithms
 {
     internal static class Program
     {
-        private const int TaskNumber = 5;
+        private const int TaskNumber = 6;
         private static readonly (string, string) DebugFilePaths = (@"..\..\in.txt", @"..\..\out.txt");
         private static readonly (string, string) ReleaseFilePaths = (@"in.txt", @"out.txt");
         private static bool debugMode;
         
         public static void Main()
         {
-            debugMode = false;
+            debugMode = true;
             
             var tasksContainer = new List<Lazy<ITask>>
             {
@@ -21,6 +21,7 @@ namespace CombinatorialAlgorithms
                 new Lazy<ITask>(() => new Task3()),
                 new Lazy<ITask>(() => new Task4()),
                 new Lazy<ITask>(() => new Task5()),
+                new Lazy<ITask>(() => new Task6()),
             };
 
             var inFileName = debugMode ? DebugFilePaths.Item1 : ReleaseFilePaths.Item1;

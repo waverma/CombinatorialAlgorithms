@@ -5,13 +5,13 @@ using System.Linq;
 
 namespace CombinatorialAlgorithms
 {
-    public class Edge
+    public class MyEdge
     {
         public Point From { get; }
         public Point To { get; }
         public int Size => From.GetMetricTo(To); 
 
-        public Edge(Point from, Point to)
+        public MyEdge(Point from, Point to)
         {
             if (from == to) throw new Exception($"Edge connect similar points: {from.ToString()}");
             From = from;
@@ -25,7 +25,7 @@ namespace CombinatorialAlgorithms
         public Dictionary<Point, Point> Name { get; } = new Dictionary<Point, Point>();
         public Dictionary<Point, Point> Next { get; } = new Dictionary<Point, Point>();
         public Dictionary<Point, int> Size { get; } = new Dictionary<Point, int>();
-        public List<Edge> Edges { get; } = new List<Edge>();
+        public List<MyEdge> Edges { get; } = new List<MyEdge>();
         
         public GrowingUp(IEnumerable<Point> points)
         {
@@ -42,7 +42,7 @@ namespace CombinatorialAlgorithms
             {
                 var rndPoint = temp.First();
                 foreach (var point in temp.Where(x => x != rndPoint))
-                    Edges.Add(new Edge(rndPoint, point));
+                    Edges.Add(new MyEdge(rndPoint, point));
                 temp.Remove(rndPoint);
             }
         }
@@ -73,17 +73,17 @@ namespace CombinatorialAlgorithms
         private Dictionary<Point, Point> Name => growingUp.Name;
         private Dictionary<Point, Point> Next => growingUp.Next;
         private Dictionary<Point, int> Size => growingUp.Size;
-        private IEnumerable<Edge> Edges => growingUp.Edges;
+        private IEnumerable<MyEdge> Edges => growingUp.Edges;
         
         public Alg(GrowingUp growingUp)
         {
             this.growingUp = growingUp;
         }
         
-        public HashSet<Edge> Solve()
+        public HashSet<MyEdge> Solve()
         {
-            var queue = new Queue<Edge>();
-            var result = new HashSet<Edge>();
+            var queue = new Queue<MyEdge>();
+            var result = new HashSet<MyEdge>();
             foreach (var edge in Edges.OrderBy(x => x.Size))
                 queue.Enqueue(edge);
 
@@ -137,7 +137,7 @@ namespace CombinatorialAlgorithms
         public (List<List<string>>, int) Solve(List<Point> inputData)
         {
             var resultOfAlg = new Alg(new GrowingUp(inputData)).Solve();
-            var a = resultOfAlg.Concat(resultOfAlg.Select(x => new Edge(x.To, x.From)))
+            var a = resultOfAlg.Concat(resultOfAlg.Select(x => new MyEdge(x.To, x.From)))
                 .GroupBy(x => x.From.Id)
                 .OrderBy(x => x.Key)
                 // .Select((x, i) => x.Select(y => $"({i} - - {x.Key} - - {y.To.Id})").ToList())
