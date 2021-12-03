@@ -115,8 +115,9 @@ namespace CombinatorialAlgorithms
 			    AllPathLength = int.Parse(data.First()),
 			    FuelTankVolume = int.Parse(secondLine[0]),
 			    FuelPerLength = int.Parse(secondLine[1]),
-			    StartSpentMoney = double.Parse(secondLine[2], CultureInfo.InvariantCulture),
-			    FuelStations = data.Skip(2).Select(x => (int.Parse(x.Split(' ').First(), CultureInfo.InvariantCulture) , double.Parse(x.Split(' ').Last(), CultureInfo.InvariantCulture))),
+			    StartSpentMoney = Parse(secondLine[2]),
+			    // StartSpentMoney = double.Parse(secondLine[2], CultureInfo.InvariantCulture),
+			    FuelStations = data.Skip(2).Select(x => (int.Parse(x.Split(' ').First()) , Parse(x.Split(' ').Last()))),
 			    FuelStationCount = int.Parse(secondLine[3])
 		    };
 
@@ -164,6 +165,11 @@ namespace CombinatorialAlgorithms
 	    public void Solve(string inputFilePath, string outputFilePath)
 	    {
 		    SaveToFile(Solve(LoadFromFile(inputFilePath)), outputFilePath);
+	    }
+
+	    private double Parse(string number)
+	    {
+		    return double.TryParse(number, out var r) ? r : double.Parse(number, CultureInfo.InvariantCulture);
 	    }
     }
 }

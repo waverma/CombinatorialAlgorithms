@@ -12,7 +12,7 @@ namespace CombinatorialAlgorithms
         
         public static void Main()
         {
-            debugMode = true;
+            debugMode = false;
             
             var tasksContainer = new List<Lazy<ITask>>
             {
